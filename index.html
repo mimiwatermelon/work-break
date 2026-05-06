@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WHITE SPACE — 余白のある働き方</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --pink-50:#fff0f3;
+  --pink-100:#ffd6e0;
+  --pink-200:#ffadc2;
+  --pink-300:#ff85a1;
+  --pink-400:#e8607e;
+  --pink-600:#b5374f;
+  --ink:#2a1a1f;
+  --ink-mid:#6b4050;
+  --ink-light:#c4a0ac;
+  --white:#fffbfc;
+  --accent:#7c3f55;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--pink-50);color:var(--ink);font-size:16px;line-height:1.8;font-weight:300;overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:rgba(255,240,243,0.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--pink-100);}
+.logo{font-family:'Playfair Display',serif;font-size:1.3rem;letter-spacing:0.15em;color:var(--ink);text-decoration:none;}
+.logo span{color:var(--pink-400);}
+nav ul{list-style:none;display:flex;gap:2rem;}
+nav ul a{font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-mid);text-decoration:none;transition:color 0.2s;}
+nav ul a:hover{color:var(--pink-400);}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8rem 3rem 5rem;text-align:center;position:relative;overflow:hidden;}
+.hero-bg-text{position:absolute;font-family:'Playfair Display',serif;font-size:28vw;font-weight:700;color:var(--pink-100);top:50%;left:50%;transform:translate(-50%,-50%);user-select:none;pointer-events:none;z-index:0;white-space:nowrap;}
+.hero-content{position:relative;z-index:1;}
+.hero-eyebrow{font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--pink-400);margin-bottom:1.5rem;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.4rem,5vw,4.2rem);font-weight:700;line-height:1.18;margin-bottom:1.5rem;}
+.hero h1 em{font-style:italic;color:var(--pink-400);}
+.hero-sub{font-size:0.95rem;color:var(--ink-mid);max-width:520px;margin:0 auto 2.5rem;line-height:2;}
+.cta-row{display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;}
+.btn-fill{background:var(--pink-400);color:#fff;padding:0.85rem 2rem;border:none;font-family:'Noto Sans JP',sans-serif;font-size:0.82rem;letter-spacing:0.1em;cursor:pointer;transition:background 0.2s;text-decoration:none;display:inline-block;}
+.btn-fill:hover{background:var(--accent);}
+.btn-outline{background:transparent;color:var(--ink-mid);padding:0.85rem 2rem;border:1px solid var(--pink-200);font-family:'Noto Sans JP',sans-serif;font-size:0.82rem;letter-spacing:0.1em;cursor:pointer;transition:all 0.2s;text-decoration:none;display:inline-block;}
+.btn-outline:hover{border-color:var(--pink-400);color:var(--pink-400);}
+
+/* SECTIONS */
+.sec{padding:6rem 3rem;}
+.sec-white{background:var(--white);}
+.sec-label{font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--ink-light);margin-bottom:2.5rem;display:flex;align-items:center;gap:0.8rem;}
+.sec-label::before{content:'';display:block;width:1.5rem;height:1px;background:var(--pink-300);}
+.sec h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;margin-bottom:0.5rem;line-height:1.2;}
+.sec h2 em{font-style:italic;color:var(--pink-400);}
+.sec .sub{color:var(--ink-mid);font-size:0.88rem;margin-bottom:2.5rem;}
+
+/* QUIZ */
+.quiz-wrap{max-width:640px;}
+.quiz-progress{height:4px;background:var(--pink-100);border-radius:2px;margin-bottom:2rem;overflow:hidden;}
+.qbar{height:100%;background:var(--pink-400);border-radius:2px;transition:width 0.4s ease;}
+.q-num{font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink-light);margin-bottom:0.8rem;}
+.q-text{font-size:1.05rem;font-weight:500;margin-bottom:1.8rem;line-height:1.65;}
+.q-opts{display:flex;flex-direction:column;gap:0.8rem;}
+.q-opt{padding:0.9rem 1.3rem;border:1px solid var(--pink-100);background:var(--white);font-family:'Noto Sans JP',sans-serif;font-size:0.88rem;text-align:left;cursor:pointer;transition:all 0.18s;color:var(--ink);}
+.q-opt:hover{border-color:var(--pink-300);background:var(--pink-50);}
+.q-opt.sel{border-color:var(--pink-400);background:var(--pink-50);color:var(--pink-600);}
+.q-nav{display:flex;justify-content:flex-end;margin-top:1.8rem;}
+.q-btn{background:var(--pink-400);color:#fff;padding:0.75rem 1.8rem;border:none;font-family:'Noto Sans JP',sans-serif;font-size:0.82rem;cursor:pointer;transition:all 0.2s;opacity:0.35;pointer-events:none;}
+.q-btn.on{opacity:1;pointer-events:all;}
+.q-btn.on:hover{background:var(--accent);}
+.q-result{display:none;text-align:center;padding:2rem 0;}
+.res-emoji{font-size:3.5rem;display:block;margin-bottom:1rem;}
+.q-result h3{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:700;margin-bottom:0.8rem;}
+.q-result h3 em{font-style:italic;color:var(--pink-400);}
+.q-result p{font-size:0.9rem;color:var(--ink-mid);line-height:1.9;max-width:460px;margin:0 auto 1.8rem;}
+.q-retry{background:transparent;color:var(--ink-mid);padding:0.6rem 1.4rem;border:1px solid var(--pink-200);font-family:'Noto Sans JP',sans-serif;font-size:0.8rem;cursor:pointer;transition:all 0.2s;}
+.q-retry:hover{border-color:var(--pink-400);color:var(--pink-400);}
+
+/* FLIP CARDS */
+.flip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;}
+.flip-card{height:240px;perspective:1000px;cursor:pointer;}
+.flip-inner{position:relative;width:100%;height:100%;transition:transform 0.55s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d;}
+.flip-card.flipped .flip-inner{transform:rotateY(180deg);}
+.flip-front,.flip-back{position:absolute;width:100%;height:100%;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:1.8rem;}
+.flip-front{background:var(--white);border:1px solid var(--pink-100);display:flex;flex-direction:column;justify-content:space-between;}
+.flip-back{background:var(--pink-400);color:#fff;transform:rotateY(180deg);display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;}
+.flip-bg-char{position:absolute;font-family:'Playfair Display',serif;font-size:9rem;font-weight:700;color:rgba(255,255,255,0.12);bottom:-1.5rem;right:-0.5rem;line-height:1;user-select:none;pointer-events:none;}
+.flip-tag{font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--pink-300);}
+.flip-front h3{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;line-height:1.35;color:var(--ink);}
+.flip-hint{font-size:0.7rem;color:var(--ink-light);}
+.flip-back p{font-size:0.85rem;line-height:1.9;color:rgba(255,255,255,0.9);}
+.flip-src{font-size:0.7rem;color:rgba(255,255,255,0.5);margin-top:1rem;}
+
+/* SLIDER SCORE */
+.sliders-wrap{max-width:600px;}
+.sl-row{margin-bottom:2rem;}
+.sl-row label{font-size:0.85rem;font-weight:500;display:flex;justify-content:space-between;margin-bottom:0.5rem;}
+.sl-row label span{color:var(--pink-400);}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:4px;background:var(--pink-100);border-radius:2px;outline:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;background:var(--pink-400);border-radius:50%;cursor:pointer;}
+.score-box{margin-top:2.5rem;padding:2rem;background:var(--pink-50);border:1px solid var(--pink-100);display:flex;align-items:center;gap:2rem;}
+.score-circle{width:80px;height:80px;border-radius:50%;border:3px solid var(--pink-400);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.score-n{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--pink-400);}
+.score-txt h4{font-size:1rem;font-weight:500;margin-bottom:0.3rem;}
+.score-txt p{font-size:0.82rem;color:var(--ink-mid);line-height:1.7;}
+
+/* ABOUT */
+.about-sec{background:var(--pink-400);color:#fff;padding:6rem 3rem;}
+.about-inner{max-width:720px;margin:0 auto;}
+.about-sec .sec-label{color:rgba(255,255,255,0.4);}
+.about-sec .sec-label::before{background:rgba(255,255,255,0.3);}
+.about-sec h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.5rem);font-weight:700;line-height:1.2;margin-bottom:2rem;}
+.about-sec p{font-size:0.92rem;color:rgba(255,255,255,0.8);line-height:2;margin-bottom:1.2rem;}
+.atags{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.8rem;}
+.atag{font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;border:1px solid rgba(255,255,255,0.35);padding:0.3rem 0.85rem;color:rgba(255,255,255,0.7);}
+
+/* NEWSLETTER */
+.nl-sec{text-align:center;padding:7rem 3rem;background:var(--pink-50);}
+.nl-sec h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,3rem);margin-bottom:1rem;font-weight:700;line-height:1.2;}
+.nl-sec h2 em{font-style:italic;color:var(--pink-400);}
+.nl-sec p{color:var(--ink-mid);font-size:0.9rem;max-width:400px;margin:0 auto 2.5rem;line-height:1.9;}
+.nl-form{display:flex;max-width:420px;margin:0 auto;}
+.nl-form input{flex:1;padding:0.85rem 1.1rem;font-family:'Noto Sans JP',sans-serif;font-size:0.85rem;border:1px solid var(--pink-200);background:var(--white);color:var(--ink);outline:none;}
+.nl-form input:focus{border-color:var(--pink-400);}
+.nl-form button{padding:0.85rem 1.6rem;background:var(--pink-400);color:#fff;border:none;font-family:'Noto Sans JP',sans-serif;font-size:0.82rem;letter-spacing:0.08em;cursor:pointer;transition:background 0.2s;}
+.nl-form button:hover{background:var(--accent);}
+
+footer{padding:2rem 3rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--pink-100);}
+footer p{font-size:0.75rem;color:var(--ink-light);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.hero-content>*{animation:fadeUp 0.65s ease both;}
+.hero-content>*:nth-child(1){animation-delay:0.1s;}
+.hero-content>*:nth-child(2){animation-delay:0.25s;}
+.hero-content>*:nth-child(3){animation-delay:0.4s;}
+.hero-content>*:nth-child(4){animation-delay:0.55s;}
+
+@media(max-width:820px){
+  nav{padding:1rem 1.5rem;}nav ul{display:none;}
+  .hero,.sec,.about-sec,.nl-sec{padding:5rem 1.5rem 4rem;}
+  .flip-grid{grid-template-columns:1fr 1fr;}
+  footer{flex-direction:column;gap:0.8rem;text-align:center;}
+}
+@media(max-width:520px){
+  .flip-grid{grid-template-columns:1fr;}
+  .nl-form{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">WHITE <span>SPACE</span></a>
+  <ul>
+    <li><a href="#quiz">診断</a></li>
+    <li><a href="#insights">知識</a></li>
+    <li><a href="#check">チェック</a></li>
+    <li><a href="#about">about</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg-text">余白</div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">働き方 × ライフスタイル</div>
+    <h1>「忙しい」は<br>自慢じゃない。<br><em>余白</em>が強さになる。</h1>
+    <p class="hero-sub">データと体験から見えてきた、本当に成果を出す人の習慣。忙しいビジネスパーソンへの「ちょっと待って」という声かけです。</p>
+    <div class="cta-row">
+      <a href="#quiz" class="btn-fill">まず診断してみる</a>
+      <a href="#insights" class="btn-outline">記事を読む</a>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section class="sec sec-white" id="quiz">
+  <div class="sec-label">Interactive Quiz</div>
+  <div class="quiz-wrap">
+    <h2>あなたの「余白不足」<br><em>診断してみましょう</em></h2>
+    <p class="sub">4問だけ。正直に答えてください。</p>
+    <div class="quiz-progress"><div class="qbar" id="qbar" style="width:0%"></div></div>
+    <div id="quiz-body">
+      <div class="q-num" id="q-num">Question 1 / 4</div>
+      <div class="q-text" id="q-text"></div>
+      <div class="q-opts" id="q-opts"></div>
+      <div class="q-nav"><button class="q-btn" id="q-next">次へ →</button></div>
+    </div>
+    <div class="q-result" id="q-result">
+      <span class="res-emoji" id="res-emoji"></span>
+      <h3 id="res-title"></h3>
+      <p id="res-text"></p>
+      <button class="q-retry" id="q-retry">もう一度やる</button>
+    </div>
+  </div>
+</section>
+
+<!-- FLIP CARDS -->
+<section class="sec" id="insights">
+  <div class="sec-label">Insights</div>
+  <h2>知ると変わる<em>6つの事実</em></h2>
+  <p class="sub">カードをタップ／クリックすると詳細が読めます。</p>
+  <div class="flip-grid">
+    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-front"><div class="flip-tag">Mind wandering</div><h3>ぼーっとする時間が、アイデアを生む</h3><div class="flip-hint">タップして詳細 →</div></div>
+        <div class="flip-back"><div class="flip-bg-char">自</div><p>脳のデフォルトモードネットワークは無意識下で問題解決を続けている。「何もしない時間」をあえてスケジュールに入れることがクリエイティビティを高める。</p><div class="flip-src">Ref: UC Santa Barbara / Nature Neuroscience</div></div>
+      </div>
+    </div>
+    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-front"><div class="flip-tag">Deep work</div><h3>週90分の深い集中が、月の成果を変える</h3><div class="flip-hint">タップして詳細 →</div></div>
+        <div class="flip-back"><div class="flip-bg-char">分</div><p>「浅い仕事」に追われる人と「深い仕事」を守る人では半年後の成果に圧倒的差が出る。通知を切るだけで思考の質が変わる。</p><div class="flip-src">Ref: Cal Newport "Deep Work"</div></div>
+      </div>
+    </div>
+    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-front"><div class="flip-tag">Sleep</div><h3>睡眠を削る人は、自分の劣化に気づかない</h3><div class="flip-hint">タップして詳細 →</div></div>
+        <div class="flip-back"><div class="flip-bg-char">を</div><p>慢性的な睡眠不足はパフォーマンスを著しく低下させながら、本人はその低下を認識できなくなる。「寝なくても大丈夫」は錯覚。</p><div class="flip-src">Ref: University of Pennsylvania Sleep Study</div></div>
+      </div>
+    </div>
+    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-front"><div class="flip-tag">Decision fatigue</div><h3>決断の質は、時間とともに下がる</h3><div class="flip-hint">タップして詳細 →</div></div>
+        <div class="flip-back"><div class="flip-bg-char">か</div><p>判事の判決研究でも証明済み——午前と午後では同じ案件への判断が変わる。重要な決断は脳がフレッシュな時間帯に集中させる。</p><div class="flip-src">Ref: PNAS "Extraneous factors in judicial decisions"</div></div>
+      </div>
+    </div>
+    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-front"><div class="flip-tag">Exercise × brain</div><h3>運動は最も安価な脳のアップグレード</h3><div class="flip-hint">タップして詳細 →</div></div>
+        <div class="flip-back"><div class="flip-bg-char">え</div><p>有酸素運動はBDNFを増やし、記憶・集中・感情制御を向上させる。週3回30分で認知機能は数ヶ月で変化する。</p><div class="flip-src">Ref: Harvard Medical School / John Ratey "Spark"</div></div>
+      </div>
+    </div>
+    <div class="flip-card" onclick="this.classList.toggle('flipped')">
+      <div class="flip-inner">
+        <div class="flip-front"><div class="flip-tag">Information diet</div><h3>情報を「摂りすぎない」が、思考力を守る</h3><div class="flip-hint">タップして詳細 →</div></div>
+        <div class="flip-back"><div class="flip-bg-char">る</div><p>1日に触れる情報量が増えるほど深く考える時間は減る。キュレーションより「意図的な無視」が高品質な意思決定を支える。</p><div class="flip-src">Ref: Cognitive load theory</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCORE METER -->
+<section class="sec sec-white" id="check">
+  <div class="sec-label">Self Check</div>
+  <h2>今週の自分を<em>採点する</em></h2>
+  <p class="sub">スライダーを動かすと余白スコアが出ます。</p>
+  <div class="sliders-wrap">
+    <div class="sl-row"><label>ぼーっとした時間 <span id="v1">5</span>/10</label><input type="range" min="0" max="10" value="5" id="s1" oninput="updateScore()"></div>
+    <div class="sl-row"><label>睡眠の質 <span id="v2">5</span>/10</label><input type="range" min="0" max="10" value="5" id="s2" oninput="updateScore()"></div>
+    <div class="sl-row"><label>深い集中ができた時間 <span id="v3">5</span>/10</label><input type="range" min="0" max="10" value="5" id="s3" oninput="updateScore()"></div>
+    <div class="sl-row"><label>運動した頻度 <span id="v4">5</span>/10</label><input type="range" min="0" max="10" value="5" id="s4" oninput="updateScore()"></div>
+    <div class="score-box">
+      <div class="score-circle"><div class="score-n" id="score-n">50</div></div>
+      <div class="score-txt"><h4 id="score-t">まあまあの余白週</h4><p id="score-d">もう少し意識すると変わります。まずは1日10分、何もしない時間を作ってみて。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-sec" id="about">
+  <div class="about-inner">
+    <div class="sec-label">About</div>
+    <h2>「もっと効率よく」を追いかけて、疲れていた私が気づいたこと。</h2>
+    <p>マーケティングの仕事をして10年以上。Web専任になってからは4年目。昔は「忙しさ」ができる人だと勘違いしていた時期がある。</p>
+    <p>時々リトル（子供）に「また仕事しているの？」と言われることがある。仕事も大事だけど、今しかないリトルの時間も大事にしたい。人生一度きり、全部含めて死ぬときに楽しかったといえる最後にしたい。</p>
+    <p>時間は有限。疲弊してこなすのではなく、余白から生まれる発想を大事にするようになった。このサイトは、忙しいビジネスパーソンへの「ちょっと待って」という声かけです。</p>
+    <p>ぼーっとしている時間にきっと別の気づきもあるはずです。</p>
+    <div class="atags">
+      <span class="atag">Web Analytics</span>
+      <span class="atag">英語教育</span>
+      <span class="atag">旅</span>
+      <span class="atag">働き方</span>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="nl-sec">
+  <h2>週に一度、<em>余白</em>をお届け。</h2>
+  <p>忙しい週の中に、ちょっとした「止まる時間」を。メールで届くニュースレターです。</p>
+  <div class="nl-form">
+    <input type="email" placeholder="your@email.com">
+    <button type="button">購読する</button>
+  </div>
+</section>
+
+<footer>
+  <a href="#" class="logo">WHITE <span>SPACE</span></a>
+  <p>© 2026 WHITE SPACE — すべての忙しい人へ</p>
+</footer>
+
+<script>
+const Qs=[
+  {q:"今週、ぼーっとする・散歩・ぼんやりなど「何もしない時間」が30分以上ありましたか？",opts:["毎日あった","2〜3日あった","ほぼなかった","そんな時間は贅沢だと思う"]},
+  {q:"仕事中、スマホの通知を見ずに2時間以上集中できましたか？",opts:["できた","1時間くらいなら","30分が限界","常に通知が気になる"]},
+  {q:"最近「なんとなく疲れてる」と感じることがありますか？",opts:["ほぼ毎日感じる","週に数回","たまに","ほとんどない"]},
+  {q:"睡眠を削って仕事や勉強をすることを「頑張り」だと思いますか？",opts:["思う","少し思う","以前は思ってた","全く思わない"]}
+];
+const SC=[[0,1,3,4],[3,2,1,0],[0,1,2,3],[0,1,2,3]];
+const RS=[
+  {emoji:"🌸",title:"余白マスター",text:"素晴らしい！あなたはすでに「余白」の価値を実践できています。このまま続けることで長期的に高いパフォーマンスを維持できます。"},
+  {emoji:"🌿",title:"もう少しで変わる",text:"いい方向に向かっています。意識はあるのに実践が追いついていない状態。まず1つ、通知オフを習慣にしてみましょう。"},
+  {emoji:"⚡",title:"余白 危険信号",text:"忙しさをステータスにしていませんか？今の働き方は短期的には動いても6ヶ月後に必ずガタが来ます。今日から10分だけ「何もしない」を試して。"},
+  {emoji:"🔥",title:"完全燃焼タイプ",text:"このスコアは「今すぐ変えるべき」サイン。睡眠と、週1回のぼーっとする時間から始めましょう。"}
+];
+let cur=0,sel=null,tot=0;
+function renderQ(){
+  const q=Qs[cur];
+  document.getElementById('q-num').textContent=`Question ${cur+1} / ${Qs.length}`;
+  document.getElementById('q-text').textContent=q.q;
+  document.getElementById('qbar').style.width=(cur/Qs.length*100)+'%';
+  const o=document.getElementById('q-opts');o.innerHTML='';
+  q.opts.forEach((t,i)=>{
+    const b=document.createElement('button');b.className='q-opt';b.textContent=t;
+    b.onclick=()=>{document.querySelectorAll('.q-opt').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');sel=i;document.getElementById('q-next').classList.add('on');};
+    o.appendChild(b);
+  });
+  sel=null;document.getElementById('q-next').classList.remove('on');
+}
+document.getElementById('q-next').onclick=()=>{
+  if(sel===null)return;
+  tot+=SC[cur][sel];cur++;
+  if(cur<Qs.length){renderQ();}
+  else{
+    document.getElementById('qbar').style.width='100%';
+    document.getElementById('quiz-body').style.display='none';
+    const r=document.getElementById('q-result');r.style.display='block';
+    const pct=tot/(Qs.length*3);
+    const ri=pct>0.75?0:pct>0.5?1:pct>0.25?2:3;
+    const res=RS[ri];
+    document.getElementById('res-emoji').textContent=res.emoji;
+    document.getElementById('res-title').textContent=res.title;
+    document.getElementById('res-text').textContent=res.text;
+  }
+};
+document.getElementById('q-retry').onclick=()=>{
+  cur=0;sel=null;tot=0;
+  document.getElementById('q-result').style.display='none';
+  document.getElementById('quiz-body').style.display='block';
+  renderQ();
+};
+renderQ();
+
+function updateScore(){
+  const vals=[+document.getElementById('s1').value,+document.getElementById('s2').value,+document.getElementById('s3').value,+document.getElementById('s4').value];
+  ['v1','v2','v3','v4'].forEach((id,i)=>document.getElementById(id).textContent=vals[i]);
+  const score=Math.round(vals.reduce((a,b)=>a+b,0)/0.4);
+  document.getElementById('score-n').textContent=score;
+  let t,d;
+  if(score>=80){t="余白リッチな1週間";d="素晴らしい！脳も体も回復できています。このペースを維持しましょう。";}
+  else if(score>=55){t="まあまあの余白週";d="もう少し意識すると変わります。まずは1日10分、何もしない時間を作ってみて。";}
+  else if(score>=30){t="余白不足気味";d="忙しさに飲み込まれていませんか？一つだけ、通知をオフにする時間を作ってみて。";}
+  else{t="緊急：余白ゼロ";d="このペースは続きません。今日の夜、スマホを置いて15分だけ散歩してみてください。";}
+  document.getElementById('score-t').textContent=t;
+  document.getElementById('score-d').textContent=d;
+}
+</script>
+</body>
+</html>
